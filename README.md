@@ -1,5 +1,12 @@
-# Marlin 3D Printer Firmware
+# BCN3DR Delta 3D Printer Firmware
 <img align="right" src="../../raw/1.1.x/buildroot/share/pixmaps/logo/marlin-250.png" />
+<img align="right" src="../../raw/1.1.x/buildroot/share/pixmaps/logo/bcn3d.png" />
+
+NOTE: This repository is not supplied by BCN3D, and is utilized at your own risk. The author of this configuration does not provide any support, or guarantee safety of use with your 3D printer.
+
+## BCN3DR
+
+This is the latest Marlin firmware for the BCN3DR 3D printer, configured based on the older Marlin firmware supplied by [BCN3D](https://github.com/BCN3D/BCN3DR-Firmware). Configuration has been ported to the latest, and is forked from the Marlin project, so it will be feasible to sync with Marlin easier in the future.
 
 ## Marlin 1.1
 
