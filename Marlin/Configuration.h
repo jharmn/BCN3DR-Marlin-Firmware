@@ -211,7 +211,7 @@
 #if POWER_SUPPLY > 0
   // Enable this option to leave the PSU off at startup.
   // Power to steppers and heaters will need to be turned on with M80.
-  #define PS_DEFAULT_OFF
+  //#define PS_DEFAULT_OFF
 #endif
 
 // @section temperature
@@ -335,10 +335,13 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // BCN3DR Delta
-
+  
   #define  DEFAULT_Kp 15.91
   #define  DEFAULT_Ki 0.74
   #define  DEFAULT_Kd 84.96
+  //#define  DEFAULT_Kp 17.59
+  //#define  DEFAULT_Ki 0.83
+  //#define  DEFAULT_Kd 93.33
 
 #endif // PIDTEMP
 
@@ -481,7 +484,7 @@
   #define DELTA_DIAGONAL_ROD 183.3 // mm
 
   // height from z=0 to home position
-  #define DELTA_HEIGHT 180.00 // get this value from auto calibrate
+  #define DELTA_HEIGHT 205.00 // get this value from auto calibrate
 
   #define DELTA_ENDSTOP_ADJ { 0.0, 0.0, 0.0 } // get these from auto calibrate
 
@@ -568,14 +571,14 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 80, 760*1.1 }  // default steps per unit for Kossel (GT2, 20 tooth)
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 80, 458.3 }  // default steps per unit for Kossel (GT2, 20 tooth)
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 500, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 400, 400, 400, 50 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -583,7 +586,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 9000, 9000, 9000, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 1500, 380 }
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -593,9 +596,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          1500    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  380    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   1500    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk (mm/s)
