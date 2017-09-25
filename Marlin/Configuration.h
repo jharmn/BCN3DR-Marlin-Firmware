@@ -337,13 +337,13 @@
   // BCN3DR Delta
 
   // Stock BCN3DR
-  #define  DEFAULT_Kp 15.91
-  #define  DEFAULT_Ki 0.74
-  #define  DEFAULT_Kd 84.96
+//  #define  DEFAULT_Kp 15.91
+//  #define  DEFAULT_Ki 0.74
+//  #define  DEFAULT_Kd 84.96
   // E3D V6 Calibrated
-//  #define  DEFAULT_Kp 27.77
-//  #define  DEFAULT_Ki 2.65
-//  #define  DEFAULT_Kd 72.79
+  #define  DEFAULT_Kp 27.77
+  #define  DEFAULT_Ki 2.65
+  #define  DEFAULT_Kd 72.79
 
 #endif // PIDTEMP
 
