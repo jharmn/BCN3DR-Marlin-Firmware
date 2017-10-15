@@ -266,7 +266,7 @@
  *
  * :{ '0': "Not used", '1':"100k / 4.7k - EPCOS", '2':"200k / 4.7k - ATC Semitec 204GT-2", '3':"Mendel-parts / 4.7k", '4':"10k !! do not use for a hotend. Bad resolution at high temp. !!", '5':"100K / 4.7k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '6':"100k / 4.7k EPCOS - Not as accurate as Table 1", '7':"100k / 4.7k Honeywell 135-104LAG-J01", '8':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT", '9':"100k / 4.7k GE Sensing AL03006-58.2K-97-G1", '10':"100k / 4.7k RS 198-961", '11':"100k / 4.7k beta 3950 1%", '12':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT (calibrated for Makibox hot bed)", '13':"100k Hisens 3950  1% up to 300°C for hotend 'Simple ONE ' & hotend 'All In ONE'", '20':"PT100 (Ultimainboard V2.x)", '51':"100k / 1k - EPCOS", '52':"200k / 1k - ATC Semitec 204GT-2", '55':"100k / 1k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '60':"100k Maker's Tool Works Kapton Bed Thermistor beta=3950", '66':"Dyze Design 4.7M High Temperature thermistor", '70':"the 100K thermistor found in the bq Hephestos 2", '71':"100k / 4.7k Honeywell 135-104LAF-J01", '147':"Pt100 / 4.7k", '1047':"Pt1000 / 4.7k", '110':"Pt100 / 1k (non-standard)", '1010':"Pt1000 / 1k (non standard)", '-3':"Thermocouple + MAX31855 (only for sensor 0)", '-2':"Thermocouple + MAX6675 (only for sensor 0)", '-1':"Thermocouple + AD595",'998':"Dummy 1", '999':"Dummy 2" }
  */
-#define TEMP_SENSOR_0 11
+#define TEMP_SENSOR_0 5
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -340,10 +340,14 @@
 //  #define  DEFAULT_Kp 15.91
 //  #define  DEFAULT_Ki 0.74
 //  #define  DEFAULT_Kd 84.96
-  // E3D V6 Calibrated
-  #define  DEFAULT_Kp 27.77
-  #define  DEFAULT_Ki 2.65
-  #define  DEFAULT_Kd 72.79
+  // E3D V6 Clone: Calibrated
+//  #define  DEFAULT_Kp 27.77
+//  #define  DEFAULT_Ki 2.65
+//  #define  DEFAULT_Kd 72.79
+  // E3D V6 Official: Calibrated
+  #define  DEFAULT_Kp 20.53
+  #define  DEFAULT_Ki 1.59
+  #define  DEFAULT_Kd 66.43
 
 #endif // PIDTEMP
 
@@ -462,7 +466,7 @@
 
   #if ENABLED(DELTA_AUTO_CALIBRATION) || ENABLED(DELTA_CALIBRATION_MENU)
     // Set the radius for the calibration probe points - max DELTA_PRINTABLE_RADIUS*0.869 for non-eccentric probes
-    #define DELTA_CALIBRATION_RADIUS 69.52 // mm
+    #define DELTA_CALIBRATION_RADIUS 63.0 // mm
     // Set the steprate for papertest probing
     #define PROBE_MANUALLY_STEP 0.025
   #endif
@@ -476,7 +480,7 @@
   #define DELTA_PRINTABLE_RADIUS 85  // mm
 
   // Center-to-center distance of the holes in the diagonal push rods.
-  #define DELTA_DIAGONAL_ROD 181 // mm
+  #define DELTA_DIAGONAL_ROD 180 // mm
 
   // height from z=0 to home position
   #define DELTA_HEIGHT 220.0 // get this value from auto calibrate
@@ -566,7 +570,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 80, 458.3 }  // default steps per unit for Kossel (GT2, 20 tooth)
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 80, 474.92 }  // default steps per unit for Kossel (GT2, 20 tooth)
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -603,9 +607,9 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define DEFAULT_XJERK                 20.0
-#define DEFAULT_YJERK                 20.0
-#define DEFAULT_ZJERK                 20.0 // Must be same as XY for delta
+#define DEFAULT_XJERK                 18.0
+#define DEFAULT_YJERK                 18.0
+#define DEFAULT_ZJERK                 18.0 // Must be same as XY for delta
 #define DEFAULT_EJERK                  5.0
 
 //===========================================================================
@@ -622,7 +626,7 @@
  *
  * Enable this option for a probe connected to the Z Min endstop pin.
  */
-//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 /**
  * Z_MIN_PROBE_ENDSTOP
@@ -643,7 +647,13 @@
  * disastrous consequences. Use with caution and do your homework.
  *
  */
-#define Z_MIN_PROBE_ENDSTOP
+//#define Z_MIN_PROBE_ENDSTOP
+
+
+#define Z_MIN_PROBE_PIN 63
+#define Z_PROBE_PULLUP false
+#define Z_PROBE_ON_HIGH true
+#define Z_PROBE_OFFSET {-25, -10, -0.005, 0}  // X, Y, Z, E distance between hotend nozzle and deployed bed leveling probe.
 
 /**
  * Probe Type
@@ -657,13 +667,13 @@
  * Use G29 repeatedly, adjusting the Z height at each point with movement commands
  * or (with LCD_BED_LEVELING) the LCD controller.
  */
-#define PROBE_MANUALLY
+//#define PROBE_MANUALLY
 
 /**
  * A Fix-Mounted Probe either doesn't deploy or needs manual deployment.
  *   (e.g., an inductive probe or a nozzle-based probe-switch.)
  */
-//#define FIX_MOUNTED_PROBE
+#define FIX_MOUNTED_PROBE
 
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
@@ -720,12 +730,12 @@
  *      O-- FRONT --+
  *    (0,0)
  */
-#define X_PROBE_OFFSET_FROM_EXTRUDER 0     // X offset: -left  +right  [of the nozzle]
+#define X_PROBE_OFFSET_FROM_EXTRUDER -25     // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER -10   // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -3.5  // Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.005  // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 4000
+#define XY_PROBE_SPEED 3000
 
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
@@ -734,7 +744,7 @@
 #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
 
 // Use double touch for probing
-//#define PROBE_DOUBLE_TOUCH
+#define PROBE_DOUBLE_TOUCH
 
 /**
  * Allen key retractable z-probe as seen on many Kossel delta printers - http://reprap.org/wiki/Kossel#Automatic_bed_leveling_probe
@@ -936,7 +946,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -954,7 +964,7 @@
   //#define ENABLE_LEVELING_FADE_HEIGHT
 
   // Set the boundaries for probing (where the probe can reach).
-  #define DELTA_PROBEABLE_RADIUS (DELTA_PRINTABLE_RADIUS - 10)
+  #define DELTA_PROBEABLE_RADIUS (DELTA_PRINTABLE_RADIUS - 40)
 
 #endif
 
@@ -1088,7 +1098,7 @@
 #endif
 
 // Delta only homes to Z
-#define HOMING_FEEDRATE_Z  (200*60)
+#define HOMING_FEEDRATE_Z  (100*60)
 
 //=============================================================================
 //============================= Additional Features ===========================
